@@ -1,5 +1,5 @@
 ---
-- hosts: homelab_servers
+- hosts: all
   become: true
   tasks:
     - name: update apt packages
