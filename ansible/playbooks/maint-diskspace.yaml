@@ -9,7 +9,7 @@
       shell: df -h / | awk 'NR==2 {print $5}'
       register: disk_usage
     - debug:
-        msg: disk_usage.stdout[:-1]
+        msg: "Disk usage: {{disk_usage.stdout[:-1]}}%"
     # - name: send discord message when disk space is over 80%
     #   uri:
     #     url: "your-webhook"
