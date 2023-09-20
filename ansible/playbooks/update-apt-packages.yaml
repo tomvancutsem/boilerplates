@@ -1,11 +1,11 @@
 ---
 - name: Update and upgrade apt packages
-  become: yes
-  apt:
-    name: '*'
-    state: latest
-    update_cache: true
-  register: apt_get_status    <<<<<<<<<<<<<<
-  until: apt_get_status is success  <<<<<<<<
-  retries: 60
-  delay: 10
+    become: yes
+    apt:
+      name: '*'
+      state: latest
+      update_cache: true
+    register: apt_get_status    <<<<<<<<<<<<<<
+    until: apt_get_status is success  <<<<<<<<
+    retries: 60
+    delay: 10
