@@ -3,18 +3,17 @@
   tasks:
     - name: Snapshot ZFS pools
       community.general.zfs:
-        name: "{{ item }}@{{ ansible_date_time.iso8601 }}"
+        name: gram/docker@{{ ansible_date_time.iso8601 }}
         state: present
-      loop: "{{ pools }}"
 
-#    - name: Get list of snapshots
-#      community.general.zfs_facts:
-#        pools: "{{ pools }}"
-#        types: snapshot
-#      register: zfs_facts
+    - name: Get list of snapshots
+      community.general.zfs_facts:
+        pools: gram/docker
+        types: snapshot
+      register: zfs_facts
 
-#    - name: Remove old snapshots
-#      community.general.zfs:
-#        name: "{{ item.name }}"
-#        state: absent
-#      loop: "{{ zfs_facts.zfs_pools[0].datasets | selectattr('type', 'equalto', 'snapshot') | selectattr('creation', 'lt', ansible_date_time.epoch|int - 7776000) | list }}"
+    - name: Remove old snapshots
+      community.general.zfs:
+        name: "{{ item.name }}"
+        state: absent
+      loop: "{{ zfs_facts.zfs_pools[0].datasets | selectattr('type', 'equalto', 'snapshot') | selectattr('creation', 'lt', ansible_date_time.epoch|int - 7776000) | list }}"
